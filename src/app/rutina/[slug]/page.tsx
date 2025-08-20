@@ -7,7 +7,7 @@ import WarmupList from "../../components/WarmupList";
 import ExerciseList from "../../components/ExerciseList";
 import FinishForm from "../../components/FinishForm";
 
-type Params = { params: { slug: string } };
+type PageParams = { slug: string };
 
 function groupByProg<T extends { progresion: string }>(items: T[]) {
   return items.reduce<Record<string, T[]>>((acc, it) => {
@@ -16,9 +16,14 @@ function groupByProg<T extends { progresion: string }>(items: T[]) {
   }, {});
 }
 
-export default async function Page({ params }: Params) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<PageParams>;
+}) {
+  const { slug } = await params;
   const data = await fetchRoutineData();
-  const day = data.dias.find((d) => d.slug === params.slug);
+  const day = data.dias.find((d) => d.slug === slug);
   if (!day) return notFound();
 
   const byProg = groupByProg(day.ejercicios);

@@ -7,12 +7,14 @@ import {
   isCardioHeader,
 } from "./utils";
 
-function cell(v: any): string {
+type Cell = string | number | boolean | null | undefined;
+
+function cell(v: unknown): string {
   if (v == null) return "";
   return undoDateyRange(String(v).trim());
 }
 
-export function parseGrid(values: any[][]): RoutineData {
+export function parseGrid(values: Cell[][]): RoutineData {
   const rows = values || [];
 
   // Warmup

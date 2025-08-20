@@ -30,6 +30,7 @@ export async function POST(req: Request) {
 
     await appendCompleted(dia, note);
     return NextResponse.redirect(new URL("/?done=1", req.url), 303);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     console.error("complete POST error:", err?.message || err);
     return NextResponse.json(

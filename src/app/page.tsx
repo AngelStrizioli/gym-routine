@@ -1,5 +1,5 @@
 export const revalidate = 60;
-
+import { Suspense } from "react";
 import { fetchRoutineData } from "./lib/sheets";
 import RoutineCard from "./components/RoutineCard";
 import WarmupList from "./components/WarmupList";
@@ -9,7 +9,9 @@ export default async function Home() {
   const data = await fetchRoutineData();
   return (
     <main className="mx-auto max-w-xl p-4 space-y-4">
-      <DoneAlert />
+      <Suspense>
+        <DoneAlert />
+      </Suspense>
       <header className="text-center">
         <h1 className="text-2xl font-bold">Mis Rutinas</h1>
         <p className="text-sm opacity-70">Sincronizado con Google Sheets</p>
