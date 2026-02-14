@@ -1,23 +1,24 @@
-export type RepRange = {
-  text: string; // canonical text, e.g. "8–10"
-  min?: number;
-  max?: number;
-};
-
-export type Section = "base" | "cardio";
+export type Progresion = "base" | "progresion 1" | "progresion 2";
 
 export type Exercise = {
-  section: Section;
-  progresion: "base" | "progresion 1" | "progresion 2";
+  progresion: Progresion;
   ejercicio: string;
-  series?: number | null;
-  reps?: RepRange | null;
-  carga?: number | null; // numbers only (RIR 1 -> 1, "60 kg" -> 60)
+  series?: string | null;
+  reps?: string | null;
+  carga?: string | null;
+};
+
+export type RoutineCardBlock = {
+  progresion: Progresion;
+  title: string;
+  subtitle?: string | null;
+  ejercicios: Exercise[];
 };
 
 export type RoutineDay = {
   label: string; // e.g. "Rutina dia 1"
   slug: string; // e.g. "rutina-dia-1"
+  cards: RoutineCardBlock[];
   ejercicios: Exercise[];
 };
 
